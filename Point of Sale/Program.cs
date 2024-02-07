@@ -21,3 +21,10 @@ List<Product> gameProducts = new List<Product>()
     new Product("UNO", "Card Game", "Classic - Test Your Friendships", 9.99m)
 };
 
+
+for (int i = 0; i < gameProducts.Count; i++)
+{
+    Console.WriteLine($"{i+1} - {gameProducts[i]}");
+
+}
+
