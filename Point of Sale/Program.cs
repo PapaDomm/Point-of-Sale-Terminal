@@ -3,7 +3,6 @@
 
 using Point_of_Sale;
 
-
 Console.WriteLine("--- Welcome to Game Ville! ---");
 
 List<Product> gameProducts = new List<Product>()
@@ -22,113 +21,123 @@ List<Product> gameProducts = new List<Product>()
     new Product("UNO", "Card Game", "Classic - Test Your Friendships", 9.99m)
 };
 
-
+bool runProgram = true;
 bool shopping = true;
-List<Product> cart = new List<Product>();
-decimal subTotal = 0;
-decimal total = 0;
-while (shopping)
+
+
+while (runProgram)
 {
-    decimal lineTotal = 0;
-    Console.WriteLine(String.Format("{0, -6} {1, -25} | {2, -30} | {3, -35} | {4, 10}", $"Item#", $"Game", "Category", "Description", "Price"));
-    Console.WriteLine("=====================================================================================================================");
-    for (int i = 0; i < gameProducts.Count; i++)
+
+    List<Product> cart = new List<Product>();
+    decimal subTotal = 0;
+    decimal total = 0;
+
+    while (shopping)
     {
-        Console.WriteLine($"{gameProducts[i].DisplayString(i)}");
+
+
+        decimal lineTotal = 0;
+        Console.WriteLine(String.Format("{0, -6} {1, -25} | {2, -30} | {3, -35} | {4, 10}", $"Item#", $"Game", "Category", "Description", "Price"));
+        Console.WriteLine("=====================================================================================================================");
+        for (int i = 0; i < gameProducts.Count; i++)
+        {
+            Console.WriteLine($"{gameProducts[i].DisplayString(i)}");
+        }
+
+
+        Console.Write("\nWhat game would you like to purchase?: ");
+        int choice = (Validator.getValidInt(1, gameProducts.Count)) - 1;
+
+        Console.Write("\nHow many items would you like to purchase?: ");
+        int quantity = Validator.getValidPositiveInt();
+        for (int i = 0; i < quantity; i++)
+        {
+            cart.Add(gameProducts[choice]);
+            lineTotal += gameProducts[choice].price;
+        }
+
+        Console.WriteLine($"\nYour line total for these items is ${Math.Round(lineTotal, 2)}");
+        subTotal += lineTotal;
+
+        Console.WriteLine();
+        for (int c = 0; c < cart.Count; c++)
+        {
+            Console.WriteLine(String.Format("{0, -25} {1, 10}", $"{cart[c].name}", cart[c].price));
+        }
+
+        shopping = Validator.getContinue("\nWould you like to keep shopping?");
+        Console.Clear();
     }
 
-    
-    Console.Write("\nWhat game would you like to purchase?: ");
-    int choice = (Validator.getValidInt(1, gameProducts.Count)) - 1;
-
-    Console.Write("\nHow many items would you like to purchase?: ");
-    int quantity = Validator.getValidPositiveInt();
-    for (int i = 0; i < quantity; i++)
-    {
-        cart.Add(gameProducts[choice]);
-        lineTotal += gameProducts[choice].price;
-    }
-
-    Console.WriteLine($"\nYour line total for these items is ${Math.Round(lineTotal, 2)}");
-    subTotal += lineTotal;
-
-    Console.WriteLine();
-    for (int c = 0; c < cart.Count; c++)
-    {
-        Console.WriteLine(String.Format("{0, -25} {1, 10}",$"{cart[c].name}", cart[c].price));
-    }
-
-    shopping = Validator.getContinue("\nWould you like to keep shopping?");
-    Console.Clear();
-}
 
 
-
-total = subTotalMath(subTotal);
-Console.WriteLine("Press any key to continue...");
-Console.ReadKey();
-Console.Clear();
-
-decimal change = -1;
-string paymentType = "";
-
-Console.WriteLine("What is your payment type?");
-Console.WriteLine("1- Cash");
-Console.WriteLine("2- Check");
-Console.WriteLine("3- Credit");
-int paymentChoice = Validator.getValidInt(1, 3);
-
-if (paymentChoice == 1)
-{
-    paymentType += "Cash ";
-    Console.WriteLine($"\nYour total was ${total}");
-    Console.WriteLine("\nPlease enter your cash ammount: ");
-    decimal cash = Validator.getValidDecimal();
-    while(cash < total)
-    {
-        Console.WriteLine("Sorry that isn't enough payment, try again: ");
-        cash = Validator.getValidDecimal();
-    }
-    change = cashPayment(cash, total);
+    total = subTotalMath(subTotal);
     Console.WriteLine("Press any key to continue...");
     Console.ReadKey();
     Console.Clear();
+
+    decimal change = -1;
+    string paymentType = "";
+
+    Console.WriteLine("What is your payment type?");
+    Console.WriteLine("1- Cash");
+    Console.WriteLine("2- Check");
+    Console.WriteLine("3- Credit");
+    int paymentChoice = Validator.getValidInt(1, 3);
+
+    if (paymentChoice == 1)
+    {
+        paymentType += "Cash ";
+        Console.WriteLine($"\nYour total was ${total}");
+        Console.WriteLine("\nPlease enter your cash ammount: ");
+        decimal cash = Validator.getValidDecimal();
+        while (cash < total)
+        {
+            Console.WriteLine("Sorry that isn't enough payment, try again: ");
+            cash = Validator.getValidDecimal();
+        }
+        change = cashPayment(cash, total);
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
+        Console.Clear();
+    }
+    else if (paymentChoice == 2)
+    {
+        paymentType += "Check ";
+        Console.WriteLine($"\nYour total was ${total}");
+        Console.WriteLine("\nPlease enter the check number: ");
+        //regular expression required
+        string check = "";
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
+        Console.Clear();
+    }
+    else
+    {
+        paymentType += "Credit ";
+        Console.WriteLine($"\nYour total was ${total}");
+        //regular expression required
+
+        Console.WriteLine("\nPlease enter your credit card number: ");
+        Validator.getValidCreditCardNumber(Console.ReadLine());
+
+        Console.WriteLine("\nPlease enter your credit card expiration date: ");
+        Validator.getValidExpiration(Console.ReadLine());
+
+        Console.WriteLine("\nPlease enter you credit card CVV: ");
+        Validator.getValidCVV(Console.ReadLine());
+
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
+        Console.Clear();
+    }
+
+
+    receipt(subTotal, paymentType, change);
+    runProgram = Validator.getContinue("Would you like to shop again?");
+    if(!runProgram) Console.WriteLine("Thanks for shopping at the Game Ville!");
+
 }
-else if (paymentChoice == 2)
-{
-    paymentType += "Check ";
-    Console.WriteLine($"\nYour total was ${total}");
-    Console.WriteLine("\nPlease enter the check number: ");
-    //regular expression required
-    string check = "";
-    Console.WriteLine("Press any key to continue...");
-    Console.ReadKey();
-    Console.Clear();
-}
-else
-{
-    paymentType += "Credit ";
-    Console.WriteLine($"\nYour total was ${total}");
-    //regular expression required
-
-    Console.WriteLine("\nPlease enter your credit card number: ");
-    Validator.getValidCreditCardNumber(Console.ReadLine());
-
-    Console.WriteLine("\nPlease enter your credit card expiration date: ");
-    Validator.getValidExpiration(Console.ReadLine());
-
-    Console.WriteLine("\nPlease enter you credit card CVV: ");
-    Validator.getValidCVV(Console.ReadLine());
-
-    Console.WriteLine("Press any key to continue...");
-    Console.ReadKey();
-    Console.Clear();
-}
-
-
-receipt(subTotal, paymentType, change);
-
-
 
 
 
