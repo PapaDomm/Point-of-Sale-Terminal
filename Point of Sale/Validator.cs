@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Point_of_Sale
@@ -262,6 +263,64 @@ namespace Point_of_Sale
             }
 
             return choice;
+        }
+
+
+        //Regex
+
+        public static void getValidCreditCardNumber(string creditCardNumber)
+        {
+            creditCardNumber = creditCardNumber.Trim().Replace(" ", "").Replace("-", "");
+
+            Regex visaccPattern = new Regex(@"^4[0-9]{12}(?:[0-9]{3})?");
+            Regex masterccPatern = new Regex(@"^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$");
+            Regex americanccPatern = new Regex(@"^3[47][0-9]{13}$ ");
+            Regex dinersccPatern = new Regex(@"^3(?:0[0-5]|[68][0-9])[0-9]{11}$");
+            Regex discoverccPatern = new Regex(@"^6(?:011|5[0-9]{2})[0-9]{12}$");
+            Regex jcbccPatern = new Regex(@"^(?:2131|1800|35\d{3})\d{11}$");
+
+            Match visaMatch = visaccPattern.Match(creditCardNumber);
+            Match masterMatch = masterccPatern.Match(creditCardNumber);
+            Match americanMatch = americanccPatern.Match(creditCardNumber);
+            Match dinersMatch = dinersccPatern.Match(creditCardNumber);
+            Match discoverMatch = discoverccPatern.Match(creditCardNumber);
+            Match jcbMatch = jcbccPatern.Match(creditCardNumber);
+
+            while(!visaMatch.Success && !masterMatch.Success && !americanMatch.Success && !dinersMatch.Success && !discoverMatch.Success && !jcbMatch.Success)
+            {
+                Console.WriteLine("Please enter a valid Credit Card Number: ");
+                creditCardNumber = Console.ReadLine();
+            }         
+        }
+
+        public static void getValidCVV(string ccCVV)
+        {
+            ccCVV = ccCVV.Trim().Replace(" ", "");
+
+            Regex ccCVVPattern = new Regex(@"^[0-9]{3}$");
+
+            Match ccCVVMatch = ccCVVPattern.Match(ccCVV);
+
+            while (!ccCVVMatch.Success)
+            {
+                Console.WriteLine("Please enter a valid CVV number (xxx): ");
+                ccCVV = Console.ReadLine();
+            }
+        }
+
+        public static void getValidExpiration(string ccExpiration)
+        {
+            ccExpiration = ccExpiration.Trim();
+
+            Regex ccExp = new Regex(@"^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$");
+
+            Match ccExpMatch = ccExp.Match(ccExpiration);
+
+            while (!ccExpMatch.Success)
+            {
+                Console.WriteLine("Please enter a valid Expiration Date (xx/xx): ");
+                ccExpiration = Console.ReadLine();
+            }
         }
     }
 }

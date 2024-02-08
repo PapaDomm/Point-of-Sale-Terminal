@@ -37,9 +37,10 @@ namespace Point_of_Sale
         }
 
         //methods
-        public override string ToString()
+        public string DisplayString(int i)
         {
-            return $"{name} | {category} | {description} | {price}";
+            string game = String.Format("{0, -6} {1, -25} | {2, -30} | {3, -35} | {4, 10}", $"{i + 1}- ", $"{name}", $"{category}", $"{description}", $"{price}");
+            return game;
         }
     }
 }
