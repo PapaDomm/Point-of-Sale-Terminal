@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Movie_Database
+namespace Point_of_Sale
 {
     internal class Validator
     {

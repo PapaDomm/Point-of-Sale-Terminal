@@ -3,6 +3,7 @@
 
 using Point_of_Sale;
 
+
 Console.WriteLine("--- Welcome to Game Ville! ---");
 
 List<Product> gameProducts = new List<Product>()
@@ -22,9 +23,29 @@ List<Product> gameProducts = new List<Product>()
 };
 
 
-for (int i = 0; i < gameProducts.Count; i++)
+bool shopping = true;
+while (shopping)
 {
-    Console.WriteLine($"{i+1} - {gameProducts[i]}");
+    for (int i = 0; i < gameProducts.Count; i++)
+    {
+        Console.WriteLine($"{i + 1} - {gameProducts[i]}");
 
+    }
+    Console.WriteLine("Please select a number.");
+    int choice = (Validator.getValidInt(1, gameProducts.Count)) - 1;
+    Console.WriteLine("How many items would you like to purchase?");
+    int quantity = Validator.getValidPositiveInt();
+    List<Product> cart = new List<Product>();
+    for (int i = 0; i < quantity; i++)
+    {
+        cart.Add(gameProducts[choice]);
+    }
+
+    shopping = Validator.getContinue("Would you like to keep shopping?");
 }
 
+
+//for(int c = 0; c < cart.Count; c++)
+//{
+//    Console.WriteLine($"{cart[c]}");
+//}
