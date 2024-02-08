@@ -2,17 +2,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Point_of_Sale
 {
     internal class StockManager
     {
 
-        string filepath = "../../../inventory.txt";
+        string filepathInventory = "../../../inventory.txt";
+        static string filepathCart = "../../../receipt.txt";
 
         public StockManager() { 
             initializeInventory();
@@ -39,9 +42,9 @@ namespace Point_of_Sale
 
 
             // export product list to text file
-            if (File.Exists(filepath) == false)
+            if (File.Exists(filepathInventory) == false)
             {
-            StreamWriter tempWriter = new StreamWriter(filepath);
+            StreamWriter tempWriter = new StreamWriter(filepathInventory);
 
                 foreach (Product product in gameProducts)
                 {
@@ -59,7 +62,7 @@ namespace Point_of_Sale
         {
             //Reading file & return game details
                 
-            StreamReader reader = new StreamReader(filepath);
+            StreamReader reader = new StreamReader(filepathInventory);
             while (true)
             {
                 string line = reader.ReadLine();
@@ -79,6 +82,74 @@ namespace Point_of_Sale
                 }
             }
             
+        }
+
+        // receipt maker
+        public static void addPurchasedGames(List<Product> cartItems, decimal subTotal, string paymentType, decimal change)
+        {
+            //adding game to receipt
+            
+            StreamWriter writer = new StreamWriter(filepathCart);
+            string[] receiptArray = receipt(subTotal, paymentType, change);
+            foreach(string item in receiptArray)
+            {
+                writer.WriteLine(item);
+            }
+
+            writer.WriteLine("");
+            foreach (Product game in cartItems)
+            {
+
+                //name
+                //category
+                //description
+                //price
+                
+                writer.WriteLine(game.DisplayString());
+            }
+            writer.Close();
+        }
+
+        public static string[] receipt(decimal subTotal, string paymentType, decimal change)
+        {
+            subTotal = Math.Round(subTotal, 2);
+            decimal salesTax = Math.Round(subTotal * 0.06m, 2);
+            decimal total = Math.Round(subTotal + salesTax, 2);
+
+
+            string[] newReceipt;
+            if (change >= 0) 
+            {
+                newReceipt = new String[5];
+                
+            } 
+            else
+            {
+                newReceipt = new String[4];
+                
+            }
+
+            Console.WriteLine($"Your Subtotal is ${subTotal}");
+            newReceipt[0] = $"Your Subtotal is ${subTotal}";
+
+            Console.WriteLine($"Your Sales Tax is ${salesTax}");
+            newReceipt[1] = $"Your Sales Tax is ${salesTax}";
+
+            Console.WriteLine($"Your Total is ${total}");
+            newReceipt[2] = $"Your Total is ${total}";
+
+            Console.WriteLine($"You paid with {paymentType}");
+            newReceipt[3] = $"You paid with {paymentType}";
+
+
+            if (change >= 0)
+            {
+                Console.WriteLine($"Your change is ${change}");
+                newReceipt[4] = $"Your change is ${change}";
+            }
+
+            return newReceipt;
+
         }
 
 

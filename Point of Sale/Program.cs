@@ -53,6 +53,7 @@ while (runProgram)
         for (int i = 0; i < quantity; i++)
         {
             cart.Add(gameProducts[choice]);
+
             lineTotal += gameProducts[choice].price;
         }
 
@@ -132,43 +133,12 @@ while (runProgram)
         Console.Clear();
     }
 
-
-    receipt(subTotal, paymentType, change);
+    //StockManager.receipt(subTotal, paymentType, change);
+    StockManager.addPurchasedGames(cart, subTotal, paymentType, change); // generates text file with receipt
     runProgram = Validator.getContinue("Would you like to shop again?");
     if(!runProgram) Console.WriteLine("Thanks for shopping at the Game Ville!");
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 static decimal subTotalMath(decimal subTotal)
@@ -182,22 +152,6 @@ static decimal subTotalMath(decimal subTotal)
     Console.WriteLine($"Your Total is ${total}");
 
     return total;
-}
-
-static void receipt(decimal subTotal, string paymentType, decimal change)
-{
-    subTotal = Math.Round(subTotal, 2);
-    decimal salesTax = Math.Round(subTotal * 0.06m, 2);
-    decimal total = Math.Round(subTotal + salesTax, 2);
-
-    Console.WriteLine($"Your Subtotal is ${subTotal}");
-    Console.WriteLine($"Your Sales Tax is ${salesTax}");
-    Console.WriteLine($"Your Total is ${total}");
-    Console.WriteLine($"You paid with {paymentType}");
-    if (change >= 0)
-    {
-        Console.WriteLine($"Your change is ${change}");
-    }
 }
 
 
