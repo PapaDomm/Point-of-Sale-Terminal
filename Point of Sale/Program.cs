@@ -3,7 +3,7 @@
 
 using Point_of_Sale;
 
-Console.WriteLine("--- Welcome to Game Ville! ---");
+
 
 //Initialize our list of games and runprogram loop
 List<Product> gameProducts = StockManager.initializeInventory();
@@ -22,7 +22,7 @@ while (runProgram)
     //Check to see if we had issues converting our .txt file over to our product objects
     if(gameProducts.Count <= 0)
     {
-        Console.WriteLine("Sorry, we are either out of our inventory or facing errors. Try again later. Goodbye!");
+        Console.WriteLine("Sorry, we are either out of our inventory or facing errors. Try again later. Goodbye!\n");
         break;
     }
 
@@ -37,7 +37,8 @@ while (runProgram)
         decimal lineTotal = 0;
 
         //display our store to our users
-        Console.WriteLine(String.Format("{0, -6} {1, -25} | {2, -30} | {3, -35} | {4, 10}", $"Item#", $"Game", "Category", "Description", "Price"));
+        Console.WriteLine(String.Format("{0, 68}", "--- Welcome to Game Ville! ---"));
+        Console.WriteLine(String.Format("{0, -6} {1, -25} | {2, -30} | {3, -35} | {4, 10}", $"\nItem# ", $"Game", "Category", "Description", "Price"));
         Console.WriteLine("=====================================================================================================================");
 
         //loop through our product list to show each product and its index
@@ -77,13 +78,13 @@ while (runProgram)
             {
                 if (gameProducts[choice].quantity == 1)
                 {
-                    Console.WriteLine($"Sorry we only have {gameProducts[choice].quantity} copy left, here you go!");
+                    Console.WriteLine($"\nSorry we only have {gameProducts[choice].quantity} copy left, here you go!");
                     quantity = 1;
                     break;
                 }
                 else
                 {
-                    Console.WriteLine($"Sorry we only have {gameProducts[choice].quantity} copies left.");
+                    Console.WriteLine($"\nSorry we only have {gameProducts[choice].quantity} copies left.");
                     Console.Write("\nHow many items would you like to purchase?: ");
                     quantity = Validator.getValidPositiveInt();
                     continue;
@@ -110,15 +111,17 @@ while (runProgram)
 
         //displays the users current cart back to them
         Console.WriteLine();
-        Console.WriteLine("Shopping Cart: ");
+        Console.WriteLine("Shopping Cart: \n");
         for (int c = 0; c < cart.Count; c++)
         {
             Console.WriteLine(String.Format("{0, -25} {1, 10}", $"{cart[c].name}", cart[c].price));
         }
+        Console.WriteLine();
+        Console.WriteLine(String.Format("{0, 36}", $"Your current Subtotal is ${subTotal}"));
 
 
         //Ask the user if they would like to add more items to their cart
-        shopping = Validator.getContinue("\nWould you like to keep shopping?");
+        shopping = Validator.getContinue("Would you like to keep shopping?");
         Console.Clear();
 
         //update store inventory
@@ -130,7 +133,7 @@ while (runProgram)
 
     //Calculate and display the users total back to them
     total = subTotalMath(subTotal);
-    Console.WriteLine("Press any key to continue...");
+    Console.WriteLine("\nPress any key to continue...");
     Console.ReadKey();
     Console.Clear();
 
@@ -148,55 +151,60 @@ while (runProgram)
     int paymentChoice = Validator.getValidInt(1, 3);
 
 
-    //
     if (paymentChoice == 1)
     {
         paymentType += "Cash ";
         Console.WriteLine($"\nYour total was ${total}");
-        Console.WriteLine("\nPlease enter your cash ammount: ");
+        Console.Write("\nPlease enter your cash ammount: ");
         decimal cash = Validator.getValidDecimal();
         while (cash < total)
         {
-            Console.WriteLine("Sorry that isn't enough payment, try again: ");
+            Console.Write("\nSorry that isn't enough payment, try again: ");
             cash = Validator.getValidDecimal(); //returns a decimal
         }
         change = cashPayment(cash, total);
-        Console.WriteLine("Press any key to continue...");
+        Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
         Console.Clear();
     }
-    //
-    //  FLAGGED NOT DONE
-    //
+    
+   
     else if (paymentChoice == 2)
     {
         paymentType += "Check ";
+
         Console.WriteLine($"\nYour total was ${total}");
-        Console.WriteLine("\nPlease enter the check number: ");
-        //regular expression required
-        string check = "";
-        Console.WriteLine("Press any key to continue...");
+
+
+        Console.Write("\nPlease enter the check number: ");
+        Validator.getValidCheckNumber(Console.ReadLine());
+
+
+        Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
         Console.Clear();
     }
 
-    // TODO: 
+
     else
     {
         paymentType += "Credit ";
         Console.WriteLine($"\nYour total was ${total}");
-        //regular expression required
 
-        Console.WriteLine("\nPlease enter your credit card number: ");
+
+        Console.Write("\nPlease enter your credit card number: ");
         Validator.getValidCreditCardNumber(Console.ReadLine());
 
-        Console.WriteLine("\nPlease enter your credit card expiration date: ");
+
+        Console.Write("\nPlease enter your credit card expiration date: ");
         Validator.getValidExpiration(Console.ReadLine());
 
-        Console.WriteLine("\nPlease enter you credit card CVV: ");
+
+        Console.Write("\nPlease enter you credit card CVV: ");
         Validator.getValidCVV(Console.ReadLine());
 
-        Console.WriteLine("Press any key to continue...");
+
+        Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
         Console.Clear();
     }
@@ -207,11 +215,21 @@ while (runProgram)
     //Asks the user if theyd like to start another cart
     runProgram = Validator.getContinue("Would you like to shop again?");
 
-    //If not, display a goodbye message
-    if(!runProgram) Console.WriteLine("Thanks for shopping at the Game Ville!");
+    Console.Clear();
 
-    //Update the stores inventory to match what has just been purchased
-    StockManager.updateInventory(gameProducts);
+    //If not, display a goodbye message
+    if (!runProgram)
+    {
+        Console.WriteLine("Thanks for shopping at the Game Ville!");
+        Console.ReadKey();
+        Console.Clear();
+    }
+
+        //Clear the console for next user
+
+
+        //Update the stores inventory to match what has just been purchased
+        StockManager.updateInventory(gameProducts);
 
 }
 

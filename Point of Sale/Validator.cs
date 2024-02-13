@@ -17,7 +17,7 @@ namespace Point_of_Sale
             int num;
             while(!int.TryParse(Console.ReadLine(), out num))
             {
-                Console.Write("Please enter a valid input: ");
+                Console.Write("\nPlease enter a valid input: ");
             }
 
             return num;
@@ -26,21 +26,9 @@ namespace Point_of_Sale
         public static int getValidInt(int lowerBound, int upperBound)
         {
             int num;
-            while (true)
+            while (!int.TryParse(Console.ReadLine(), out num) || (num < lowerBound || num > upperBound))
             {
-                if (!int.TryParse(Console.ReadLine(), out num))
-                {
-                    Console.Write($"Please enter a valid input of {lowerBound} - {upperBound}: ");
-                    continue;
-                }
-
-                if(num < lowerBound || num > upperBound)
-                {
-                    Console.Write($"Please enter a valid input of {lowerBound} - {upperBound}: ");
-                    continue;
-                }
-
-                break;
+                Console.Write($"\nPlease enter a valid input of {lowerBound} - {upperBound}: ");
             }
 
             return num;
@@ -49,9 +37,9 @@ namespace Point_of_Sale
         public static int getValidPositiveInt()
         {
             int num;
-            while(!int.TryParse(Console.ReadLine(), out num) && num < 0)
+            while(!int.TryParse(Console.ReadLine(), out num) || num < 0)
             {
-                Console.Write("Please enter a valid positive input: ");
+                Console.Write("\nPlease enter a valid positive input: ");
             }
 
             return num;
@@ -60,7 +48,7 @@ namespace Point_of_Sale
         public static int getValidNegativeInt()
         {
             int num;
-            while (!int.TryParse(Console.ReadLine(), out num) && num > 0)
+            while (!int.TryParse(Console.ReadLine(), out num) || num > 0)
             {
                 Console.Write("Please enter a valid negative input: ");
             }
@@ -164,7 +152,7 @@ namespace Point_of_Sale
             decimal num;
             while (!decimal.TryParse(Console.ReadLine(), out num))
             {
-                Console.Write("Please enter a valid input: ");
+                Console.Write("\nPlease enter a valid input: ");
             }
 
             return num;
@@ -206,7 +194,7 @@ namespace Point_of_Sale
         //CONTINUES
         public static bool getContinue()
         {
-            Console.Write("Would you like to continue?(Y/N): ");
+            Console.Write("\nWould you like to continue?(Y/N): ");
             string answer = Console.ReadLine().ToLower().Trim();
             while (answer != "y" && answer != "n")
             {
@@ -226,7 +214,7 @@ namespace Point_of_Sale
 
         public static bool getContinue(string message)
         {
-            Console.Write($"{message}(Y/N): ");
+            Console.Write($"\n{message}(Y/N): ");
             string answer = Console.ReadLine().ToLower().Trim();
             while (answer != "y" && answer != "n")
             {
@@ -246,7 +234,7 @@ namespace Point_of_Sale
 
         public static bool getContinue(string message, string val1, string val2)
         {
-            Console.Write($"{message}({val1}/{val2}): ");
+            Console.Write($"\n{message}({val1}/{val2}): ");
             string answer = Console.ReadLine().ToLower().Trim();
             while (answer != "y" && answer != "n")
             {
@@ -279,6 +267,22 @@ namespace Point_of_Sale
 
 
         //Regex
+        public static void getValidCheckNumber(string checkNumber)
+        {
+            checkNumber = checkNumber.Trim().Replace(" ", "");
+
+            Regex checkPatern = new Regex(@"^[0-9]{3,6}$");
+
+            Match checkMatch = checkPatern.Match(checkNumber);
+
+            while(!checkMatch.Success)
+            {
+                Console.Write("\nPlease enter a valid Check Number: ");
+                checkNumber = Console.ReadLine().Trim().Replace(" ", "");
+                checkMatch = checkPatern.Match(checkNumber);
+            }
+        }
+
 
         public static void getValidCreditCardNumber(string creditCardNumber)
         {
@@ -288,8 +292,8 @@ namespace Point_of_Sale
 
             while(!isCreditCard)
             {
-                Console.WriteLine("Please enter a valid Credit Card Number: ");
-                creditCardNumber = Console.ReadLine();
+                Console.Write("\nPlease enter a valid Credit Card Number: ");
+                creditCardNumber = Console.ReadLine().Trim().Replace(" ", "").Replace("-", "");
                 isCreditCard = isMatchCC(creditCardNumber);
             }         
         }
@@ -304,8 +308,8 @@ namespace Point_of_Sale
 
             while (!ccCVVMatch.Success)
             {
-                Console.WriteLine("Please enter a valid CVV number (xxx): ");
-                ccCVV = Console.ReadLine();
+                Console.Write("\nPlease enter a valid CVV number (xxx or xxxx): ");
+                ccCVV = Console.ReadLine().Trim().Replace(" ", "");
                 ccCVVMatch = ccCVVPattern.Match(ccCVV);
             }
         }
@@ -320,8 +324,8 @@ namespace Point_of_Sale
 
             while (!ccExpMatch.Success)
             {
-                Console.WriteLine("Please enter a valid Expiration Date (xx/xx): ");
-                ccExpiration = Console.ReadLine();
+                Console.Write("\nPlease enter a valid Expiration Date (xx/xx): ");
+                ccExpiration = Console.ReadLine().Trim();
                 ccExpMatch = ccExp.Match(ccExpiration);
             }
         }
