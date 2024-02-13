@@ -26,9 +26,21 @@ namespace Point_of_Sale
         public static int getValidInt(int lowerBound, int upperBound)
         {
             int num;
-            while (!int.TryParse(Console.ReadLine(), out num) && (num < lowerBound || num > upperBound))
+            while (true)
             {
-                Console.Write($"Please enter a valid input of {lowerBound} - {upperBound}: ");
+                if (!int.TryParse(Console.ReadLine(), out num))
+                {
+                    Console.Write($"Please enter a valid input of {lowerBound} - {upperBound}: ");
+                    continue;
+                }
+
+                if(num < lowerBound || num > upperBound)
+                {
+                    Console.Write($"Please enter a valid input of {lowerBound} - {upperBound}: ");
+                    continue;
+                }
+
+                break;
             }
 
             return num;
