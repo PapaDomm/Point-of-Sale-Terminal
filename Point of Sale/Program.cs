@@ -53,17 +53,17 @@ while (runProgram)
 
         //Loop to make sure the game the user has choosen is not out of stock!
         //May be redundant after recent changes to updating inventory after each item is added to cart
-        while(true)
-        {
-            if (gameProducts[choice].quantity == 0)
-            {
-                Console.WriteLine("Sorry that game is out of stock! Please choose another!");
-                Console.Write("\nWhat game would you like to purchase?: ");
-                choice = (Validator.getValidInt(1, gameProducts.Count)) - 1;
-                continue;
-            }
-            break;
-        }
+        //while(true)
+        //{
+        //    if (gameProducts[choice].quantity == 0)
+        //    {
+        //        Console.WriteLine("Sorry that game is out of stock! Please choose another!");
+        //        Console.Write("\nWhat game would you like to purchase?: ");
+        //        choice = (Validator.getValidInt(1, gameProducts.Count)) - 1;
+        //        continue;
+        //    }
+        //    break;
+        //}
 
 
         //Gets user input on quanity of items they would like to add to the cart
