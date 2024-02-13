@@ -120,6 +120,8 @@ while (runProgram)
         //Ask the user if they would like to add more items to their cart
         shopping = Validator.getContinue("\nWould you like to keep shopping?");
         Console.Clear();
+
+        //update store inventory
         StockManager.updateInventory(gameProducts);
 
     }
@@ -198,9 +200,6 @@ while (runProgram)
         Console.ReadKey();
         Console.Clear();
     }
-
-    //Redundant method call
-    //StockManager.receipt(subTotal, paymentType, change);
 
     // Generates text file with receipt and displays the receipt to the console
     StockManager.addPurchasedGames(cart ,subTotal, paymentType, change) ; 

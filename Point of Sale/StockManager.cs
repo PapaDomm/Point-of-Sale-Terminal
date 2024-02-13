@@ -85,7 +85,7 @@ namespace Point_of_Sale
                     //if there is an error, possibly send error message to user
                     catch (Exception e)
                     {
-                        //Console.WriteLine("Inventory List Error, Please make sure the inventory file is not corrupted!");
+                        Console.WriteLine("Inventory List Error, Please make sure the inventory file is not corrupted and in proper format!");
                     }
 
                 }

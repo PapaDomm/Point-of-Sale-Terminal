@@ -1,54 +1,9 @@
 	--- GameVille Reciept ---
 
-Among US                         $20
-Among US                         $20
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Baldurs Gate 3                $59.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
-Spiderman Remastered          $19.99
+Psychonauts 2                 $20.39
 
-           Your Subtotal is $1859.57
-           Your Sales Tax is $111.57
-              Your Total is $1971.14
-                 You paid with Cash 
+             Your Subtotal is $20.39
+             Your Sales Tax is $1.22
+                Your Total is $21.61
+               You paid with Credit 
                                     
-               Your change is $28.86

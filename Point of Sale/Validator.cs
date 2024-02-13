@@ -284,24 +284,13 @@ namespace Point_of_Sale
         {
             creditCardNumber = creditCardNumber.Trim().Replace(" ", "").Replace("-", "");
 
-            Regex visaccPattern = new Regex(@"^4[0-9]{12}(?:[0-9]{3})?");
-            Regex masterccPatern = new Regex(@"^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$");
-            Regex americanccPatern = new Regex(@"^3[47][0-9]{13}$ ");
-            Regex dinersccPatern = new Regex(@"^3(?:0[0-5]|[68][0-9])[0-9]{11}$");
-            Regex discoverccPatern = new Regex(@"^6(?:011|5[0-9]{2})[0-9]{12}$");
-            Regex jcbccPatern = new Regex(@"^(?:2131|1800|35\d{3})\d{11}$");
+            bool isCreditCard = isMatchCC(creditCardNumber);
 
-            Match visaMatch = visaccPattern.Match(creditCardNumber);
-            Match masterMatch = masterccPatern.Match(creditCardNumber);
-            Match americanMatch = americanccPatern.Match(creditCardNumber);
-            Match dinersMatch = dinersccPatern.Match(creditCardNumber);
-            Match discoverMatch = discoverccPatern.Match(creditCardNumber);
-            Match jcbMatch = jcbccPatern.Match(creditCardNumber);
-
-            while(!visaMatch.Success && !masterMatch.Success && !americanMatch.Success && !dinersMatch.Success && !discoverMatch.Success && !jcbMatch.Success)
+            while(!isCreditCard)
             {
                 Console.WriteLine("Please enter a valid Credit Card Number: ");
                 creditCardNumber = Console.ReadLine();
+                isCreditCard = isMatchCC(creditCardNumber);
             }         
         }
 
@@ -309,7 +298,7 @@ namespace Point_of_Sale
         {
             ccCVV = ccCVV.Trim().Replace(" ", "");
 
-            Regex ccCVVPattern = new Regex(@"^[0-9]{3}$");
+            Regex ccCVVPattern = new Regex(@"^[0-9]{3,4}$");
 
             Match ccCVVMatch = ccCVVPattern.Match(ccCVV);
 
@@ -317,6 +306,7 @@ namespace Point_of_Sale
             {
                 Console.WriteLine("Please enter a valid CVV number (xxx): ");
                 ccCVV = Console.ReadLine();
+                ccCVVMatch = ccCVVPattern.Match(ccCVV);
             }
         }
 
@@ -332,6 +322,33 @@ namespace Point_of_Sale
             {
                 Console.WriteLine("Please enter a valid Expiration Date (xx/xx): ");
                 ccExpiration = Console.ReadLine();
+                ccExpMatch = ccExp.Match(ccExpiration);
+            }
+        }
+
+        public static bool isMatchCC(string creditCardNumber)
+        {
+            Regex visaccPattern = new Regex(@"^4[0-9]{12}(?:[0-9]{3})?");
+            Regex masterccPatern = new Regex(@"^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$");
+            Regex americanccPatern = new Regex(@"^3[47][0-9]{13}$ ");
+            Regex dinersccPatern = new Regex(@"^3(?:0[0-5]|[68][0-9])[0-9]{11}$");
+            Regex discoverccPatern = new Regex(@"^6(?:011|5[0-9]{2})[0-9]{12}$");
+            Regex jcbccPatern = new Regex(@"^(?:2131|1800|35\d{3})\d{11}$");
+
+            Match visaMatch = visaccPattern.Match(creditCardNumber);
+            Match masterMatch = masterccPatern.Match(creditCardNumber);
+            Match americanMatch = americanccPatern.Match(creditCardNumber);
+            Match dinersMatch = dinersccPatern.Match(creditCardNumber);
+            Match discoverMatch = discoverccPatern.Match(creditCardNumber);
+            Match jcbMatch = jcbccPatern.Match(creditCardNumber);
+
+            if(!visaMatch.Success && !masterMatch.Success && !americanMatch.Success && !dinersMatch.Success && !discoverMatch.Success && !jcbMatch.Success)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }
