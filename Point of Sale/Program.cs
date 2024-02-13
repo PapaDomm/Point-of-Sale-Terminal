@@ -48,7 +48,7 @@ while (runProgram)
         }
 
         //Get the user input for the index of which game they would like to purchase
-        Console.Write("\nWhat game would you like to purchase?: ");
+        Console.Write("\nWhat game would you like to purchase? Enter the Item #: ");
         int choice = (Validator.getValidInt(1, gameProducts.Count)) - 1;
 
         //Loop to make sure the game the user has choosen is not out of stock!

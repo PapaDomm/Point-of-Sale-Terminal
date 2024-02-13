@@ -1,12 +1,12 @@
-Hollow Knight|Metroidvania|Fun game about bugs!|14.99|0
-Palworld|Open World|GTA Pokemon|29.99|5
-Crash Bandicoot 4|Platformer|Jump on boxes and die|19.99|2
-Tekken 8|3D Fighter|Throw your son in a volcano|69.99|20
+Palworld|Open World|GTA Pokemon|29.99|1
+Tekken 8|3D Fighter|Throw your son in a volcano|69.99|10
 Persona 3 Reload|JRPG|Stay up late after school|69.99|2
 League of Legends|MOBA|Torture|100000|1
 Monster Hunter Rise|JRPG|Beat up mean animals|39.99|13
 Spiderman Remastered|Open World|Vigilante game|19.99|16
 Baldurs Gate 3|RPG|Worms in my brain|59.99|24
-Among US|Social Deduction|Drama|20|2
-Psychonauts 2|Platformer|I miss summer camp|20.39|11
-UNO|Card Game|Classic - Test Your Friendships|9.99|8
+Among US|Social Deduction|Drama|20|1
+Crash Bandicoot 4|Platformer|Jump on boxes and die|19.99|0
+Psychonauts 2|Platformer|I miss summer camp|20.39|0
+UNO|Card Game|Classic - Test Your Friendships|9.99|0
+Hollow Knight|Metroidvania|Fun game about bugs!|14.99|0

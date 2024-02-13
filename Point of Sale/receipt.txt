@@ -1,18 +1,12 @@
 	--- GameVille Reciept ---
 
-Hollow Knight                 $14.99
-Hollow Knight                 $14.99
-Hollow Knight                 $14.99
-Hollow Knight                 $14.99
-Hollow Knight                 $14.99
-Hollow Knight                 $14.99
-Hollow Knight                 $14.99
-Hollow Knight                 $14.99
-Hollow Knight                 $14.99
-Hollow Knight                 $14.99
+Palworld                      $29.99
+Palworld                      $29.99
+Palworld                      $29.99
 
-            Your Subtotal is $149.90
-             Your Sales Tax is $8.99
-               Your Total is $158.89
-                You paid with Check 
+             Your Subtotal is $89.97
+             Your Sales Tax is $5.40
+                Your Total is $95.37
+                 You paid with Cash 
                                     
+                Your change is $0.63
